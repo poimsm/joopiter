@@ -1,0 +1,269 @@
+<!-- <h3>{{likee.length}}</h3>
+<div *ngFor="let post of postt">
+  {{post.nombre}} <br>
+  <div *ngFor="let like of likee">
+    <div *ngIf="like.post_id === post.post_id">
+      {{like.nombre}} <br>
+    </div>
+  </div>
+  <hr>
+</div>
+<hr> -->
+
+
+
+
+<div class="row" style="background:#fff;">
+<div *ngIf="showImg" (click)="showImg = false" style="position:fixed;left:0px;top:0px;background-color: rgb(0,0,0);background-color: rgba(0,0,0,0.6); height:100%;width:100%;z-index:2;display:flex;justify-content:center;align-items:center;">
+  <img src="assets/12.jpg" class="fondo">
+</div>
+  <div *ngFor="let post of postt; let i = index" class="shadow-bottom-rightt col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-3 col-xl-4 offset-xl-3 " style=";margin-bottom:0px;border-radius:6px;display:flex;justify-content:center">
+
+    <div class="" id="visto"  style="width:100%;;padding:10px">
+      <div class=""style="width:100%;text-align:right;margin-bottom:-15px">
+        <div class="btn-group dropleft">
+          <a style="padding:0px;" class="" data-toggle="dropdown"  aria-expanded="false">
+            <i class="fas fa-ellipsis-h" style="color:#bbb"></i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item">Guardar</a>
+            <a class="dropdown-item">Mandar PM</a>
+            <a class="dropdown-item">Reportar</a>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:flex-start;align-items:flex-start;">
+        <div>
+          <img src="assets/02.jpg" class=""style="margin-top:6px;width:50px;height:50px;object-fit:cover;border-radius:50%" alt="">
+        </div>
+        <div style="padding-left:15px;width:100%">
+          <p style="font-weight:450;padding:0px;margin:0px;font-size:16px;max-width:420px">
+            {{post.mensaje}}
+          </p>
+          <div  style="max-width:280px">
+            <img class=""src="assets/04.jpg" style="max-height:100%;max-width:100%;border-radius:2px;border-bottom:5px solid dodgerblue;" alt="">
+          </div>
+          <div class="text-muted" style="margin:0px;color:#333;display:flex;justify-content:space-between;flex-wrap:wrap">
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;">
+              <div class="text-muted" style="margin-right:10px;">
+                hace 14 min
+              </div>
+              <div class="text-muted" style="display:flex;justify-content:flex-start;align-items:center">
+                <div style="width:10px;height:10px;border-radius:50%;background:#7CBA00;margin-right:5px">
+                </div>
+                <a (click)="navegar()" style="padding:0px;" >
+                  <span class="text-primary" style="font-weight:450">{{post.nombre}}  </span>
+                </a>
+                <a *ngIf="l != i" (click)="l = i" style="padding:0px;margin-left:10px"class="dropdown-toggle">
+                  <span class="text-dark" style="font-weight:450">Ver respuestas</span>
+                </a>
+                <a *ngIf="l === i"(click)="l = 999" style="padding:0px;margin-left:10px"class="dropdown-toggle">
+                  <span class="text-dark" style="font-weight:450">Ocultar</span>
+                </a>
+              </div>
+            </div>
+            <div class="text-muted" style=";width:130px;display:flex;justify-content:center;flex-wrap:wrap">
+              <div style="display:flex;align-items:center;;margin-right:3px;">
+                12 <i class="fas fa-images" style="color:#bbb;margin-left:3px"></i>
+              </div>
+              <div style="display:flex;align-items:center;margin-right:3px;">
+                <div *ngFor="let comentario of comentarioss">
+                  <div *ngIf="comentario.post_id === post.post_id">
+                    {{ comentcounter() }}
+                  </div>
+                </div>
+
+                {{comentC}} <i class="far fa-comment-alt"style="color:#bbb;margin-left:3px"></i>
+              </div>
+              <div style="display:flex;align-items:center;margin-right:3px">
+                <div *ngFor="let like of likee">
+                  <div *ngIf="like.post_id === post.post_id">
+                    {{ likecounter() }}
+
+                  </div>
+                </div>
+
+                <div *ngFor="let like of likee; let j = index">
+                    <div *ngIf="like.usuario_id === 'hola'; else likeNoDado">
+                      <div *ngIf="like.post_id === post.post_id">
+                      <a (click) ="quitarLikePost($event.currentTarget.id)" [attr.id] = "post.post_id" >
+                        <!-- {{ LikeToPost(postt.post_id) }} -->
+                        <!-- {{ likecountershowminus() }} -->
+                        1
+                        <!-- {{ LikeToPost(post.post_id) }} -->
+
+                        <i  class="fas fa-thumbs-up" style="color:gold;margin-left:3px"></i>
+                      </a>
+                    </div>
+                    <!-- <div>
+                      <a *ngIf="likeShow === likeC" (click) ="agregarLikePost($event.currentTarget.id)" [attr.id] = "post.post_id" >
+                        {{ likecountershow() }}
+                        <i  class="fas fa-thumbs-up" style="color:blue;margin-left:3px"></i>
+                      </a>
+                    </div> -->
+                  </div>
+
+
+<!-- {{ likeC }}
+{{likee.length}}
+{{j}} -->
+
+                    <ng-template #likeNoDado>
+                      <div *ngIf="j === likee.length-1">
+                      <a (click) ="quitarLikePost($event.currentTarget.id)" [attr.id] = "post.post_id" >
+                        {{ likeC }}
+                        <i  class="fas fa-thumbs-up" style="color:blue;margin-left:3px"></i>
+                      </a>
+                    </div>
+                    </ng-template>
+
+
+
+
+
+                </div>
+
+
+                <!-- <div *ngFor="let like of likee">
+                  <div *ngIf=" like.usuario_id === 'hola' && like.post_id === post.post_id">
+                    {{ hoola() }}
+                  </div>
+                </div> -->
+
+
+                <!-- <div *ngIf="likeflag; then likeDado; else likeNoDado">
+                </div>
+
+                <ng-template #likeDado>
+                  <a (click) ="quitarLikePost($event.currentTarget.id)" [attr.id] = "post.post_id" >
+                    {{ likeC }}
+                    <i  class="fas fa-thumbs-up" style="color:gold;margin-left:3px"></i>
+                  </a>
+                </ng-template>
+                <ng-template #likeNoDado>
+                  <a  (click)="agregarLikePost($event.currentTarget.id)" [attr.id] = "post.post_id" >
+                    {{ likeC }}
+                    <i class="fas fa-thumbs-up" style="color:blue;margin-left:3px"></i>
+                  </a>
+                </ng-template> -->
+
+
+
+
+
+              </div>
+            </div>
+
+
+            <div *ngIf="i === l"class="bg-light" style="padding-left:8px;padding-right:8px;padding-bottom:15px;border-radius:3px">
+              <div *ngFor="let comentario of comentarioss">
+                <div *ngIf="comentario.post_id === post.post_id">
+                  <div class="" style="margin-left:8px;display:flex;justify-content:flex-start;align-items:center">
+                    <div>
+                      <img src="assets/10.jpg" class=""style="margin-right:5px;margin-top:6px;width:30px;height:30px;object-fit:cover;border-radius:50%" alt="">
+                    </div>
+                    <div style="width:10px;height:10px;border-radius:50%;background:#7CBA00;margin-right:5px">
+                    </div>
+                    <span style="color:#007bff;font-size:16px;font-weight:450;">ByRaz</span>
+                  </div>
+                  <div class="" style="margin-left:0px; display:flex;justify-content:flex-start;flex-wrap:wrap;align-items:center">
+                    <div style="width:100%">
+                      {{comentario.mensaje}}
+                    </div>
+                    <div style="display:flex;justify-content:center;flex-wrap:wrap;align-items:center;max-width:550px">
+                      <div (click)="showImg = true" class="ajuste" style=";margin-top:5px;max-width:300px;">
+                        <img (click)="showImg = true" class=""src="assets/15.jpg" style="max-height:100%;max-width:100%;border-radius:2px;" alt="">
+                      </div>
+                      <div  (click)="showImg = true" class="ajuste" style=";margin-top:5px;max-width:300px;">
+                        <img class=""src="assets/11.jpg" style="max-height:100%;max-width:100%;border-radius:2px;" alt="">
+                      </div>
+                      <div  (click)="showImg = true" class="ajuste" style=";margin-top:5px;max-width:300px;">
+                        <img class=""src="assets/12.jpg" style="max-height:100%;max-width:100%;border-radius:2px;" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    {{ likereset() }}
+    {{ comentreset() }}
+  </div>
+</div>
+
+
+
+
+
+<!-- <div class="row" style="background:#fff;">
+<div *ngIf="showImg" (click)="showImg = false" style="position:fixed;left:0px;top:0px;background-color: rgb(0,0,0);background-color: rgba(0,0,0,0.6); height:100%;width:100%;z-index:2;display:flex;justify-content:center;align-items:center;">
+  <img src="assets/12.jpg" class="fondo">
+</div>
+  <div *ngFor="let post of _ds.posts; let i = index" class="shadow-bottom-rightt col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-5 offset-lg-3 col-xl-5 offset-xl-3 " style=";margin-bottom:0px;border-radius:6px;display:flex;justify-content:center">
+    <div class="" id="visto"  style="width:100%;;padding:10px">
+      <div class=""style="width:100%;text-align:right;margin-bottom:-15px">
+        <div class="btn-group dropleft">
+          <a style="padding:0px;" class="" data-toggle="dropdown"  aria-expanded="false">
+            <i class="fas fa-ellipsis-h" style="color:#bbb"></i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item">Guardar</a>
+            <a class="dropdown-item">Mandar PM</a>
+            <a class="dropdown-item">Reportar</a>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:flex-start;align-items:flex-start;">
+        <div>
+          <img src="assets/02.jpg" class=""style="margin-top:6px;width:50px;height:50px;object-fit:cover;border-radius:50%" alt="">
+        </div>
+        <div style="padding-left:15px;width:100%">
+          <p style="font-weight:450;padding:0px;margin:0px;font-size:16px;max-width:420px">
+            {{post.mensaje}}
+          </p>
+          <div  style="max-width:280px">
+            <img class=""src="assets/04.jpg" style="max-height:100%;max-width:100%;border-radius:2px;border-bottom:5px solid dodgerblue;" alt="">
+          </div>
+          <div class="text-muted" style="margin:0px;color:#333;display:flex;justify-content:space-between;flex-wrap:wrap">
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;">
+              <div class="text-muted" style="margin-right:10px;">
+                hace 14 min
+              </div>
+              <div class="text-muted" style="display:flex;justify-content:flex-start;align-items:center">
+                <div style="width:10px;height:10px;border-radius:50%;background:#7CBA00;margin-right:5px">
+                </div>
+                <a (click)="navegar()" style="padding:0px;" >
+                  <span class="text-primary" style="font-weight:450">{{post.nombre}}  </span>
+                </a>
+                <a *ngIf="l != i" (click)="l = i" style="padding:0px;margin-left:10px"class="dropdown-toggle">
+                  <span class="text-dark" style="font-weight:450">Ver respuestas</span>
+                </a>
+                <a *ngIf="l === i"(click)="l = 999" style="padding:0px;margin-left:10px"class="dropdown-toggle">
+                  <span class="text-dark" style="font-weight:450">Ocultar</span>
+                </a>
+              </div>
+            </div>
+            <div class="text-muted" style=";width:120px;display:flex;justify-content:center;flex-wrap:wrap">
+              <div style="display:flex;align-items:center;;margin-right:3px;">
+                12 <i class="fas fa-images" style="color:#bbb;margin-left:3px"></i>
+              </div>
+              <div style="display:flex;align-items:center;margin-right:3px;">
+                {{post.Ncomentarios}} <i class="far fa-comment-alt"style="color:#bbb;margin-left:3px"></i>
+              </div>
+              <div style="display:flex;align-items:center;margin-right:3px">
+                <a (click) = "agregarLikePost($event.currentTarget.id)" [attr.id] = "post.pId" >
+                  {{post.Nlikes}} <i class="fas fa-thumbs-up"style="color:gold;margin-left:3px"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
